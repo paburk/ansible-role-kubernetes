@@ -7,7 +7,16 @@ dependency:
 driver:
   name: docker
 platforms:
-  - name: instance
+  - name: control_plane
+    image: "geerlingguy/docker-${MOLECULE_DISTRO:-rockylinux9}-ansible:latest"
+    command: ${MOLECULE_DOCKER_COMMAND:-""}
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+      - /var/lib/containerd
+    cgroupns_mode: host
+    privileged: true
+    pre_build_image: true
+  - name: node
     image: "geerlingguy/docker-${MOLECULE_DISTRO:-rockylinux9}-ansible:latest"
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
@@ -18,5 +27,14 @@ platforms:
     pre_build_image: true
 provisioner:
   name: ansible
+  env:
+    ANSIBLE_CONFIG: ansible.cfg
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
+  
+  inventory:
+    host_vars:
+      control_plane:
+        kubernetes_role: control_plane
+      node:
+        kubernetes_role: node
