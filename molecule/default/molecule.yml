@@ -7,7 +7,7 @@ dependency:
 driver:
   name: docker
 platforms:
-  - name: control_plane
+  - name: controlplane
     image: "geerlingguy/docker-${MOLECULE_DISTRO:-rockylinux9}-ansible:latest"
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
@@ -34,7 +34,7 @@ provisioner:
   
   inventory:
     host_vars:
-      control_plane:
+      controlplane:
         kubernetes_role: control_plane
       node:
         kubernetes_role: node
