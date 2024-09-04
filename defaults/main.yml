@@ -1,4 +1,6 @@
 ---
+debug_tools_state: present
+
 kubernetes_packages:
   - name: kubelet
     state: present
