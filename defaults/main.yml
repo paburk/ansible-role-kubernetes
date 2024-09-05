@@ -11,6 +11,20 @@ kubernetes_packages:
   - name: kubernetes-cni
     state: present
 
+debug_packages_debian:
+  - name: net-tools
+    state: present
+  - name: tcpdump
+    state: present
+  - name: nmap
+    state: present
+  - name: dnsutils
+    state: present
+  - name: telnet
+    state: present
+  - name: iputils-ping
+    state: present
+
 kubernetes_version: '1.25'
 kubernetes_version_rhel_package: '1.25.1'
 

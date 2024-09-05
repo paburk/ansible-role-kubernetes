@@ -10,9 +10,6 @@
 - include_tasks: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
-- include_tasks: install_debugtools.yml
-  when: ansible_os_family == 'Debian'
-
 - name: Ensure dependencies are installed.
   package: name=curl state=present
 

@@ -54,6 +54,10 @@
   retries: 12
   delay: 5
 
+- name: Print Flannel configure output
+  debug: var=flannel_result.stdout
+  when: flannel_result
+
 - name: Configure Calico networking.
   command: "kubectl apply -f {{ kubernetes_calico_manifest_file }}"
   register: calico_result
